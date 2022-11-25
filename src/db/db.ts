@@ -3,7 +3,7 @@ import Dexie, { Table } from "dexie";
 export interface Note {
   id?: number;
   title: string;
-  text: number;
+  text: string;
 }
 
 export class MySubClassedDexie extends Dexie {
