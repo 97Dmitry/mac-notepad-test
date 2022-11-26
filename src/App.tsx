@@ -1,24 +1,22 @@
 import "antd/dist/reset.css";
+import "assets/styles/core.css";
 
-import { useDatabaseContext } from "hooks/useDataBaseContext";
+import { ConfigProvider } from "antd";
+import { Dashboard } from "pages";
+import { DataBaseProvider } from "providers";
 
 const App = () => {
-  const { noteList, updateNote } = useDatabaseContext();
-
   return (
-    <main>
-      {noteList?.map((note) => {
-        return (
-          <div
-            key={note.id}
-            onClick={() => {
-              updateNote && updateNote({ id: note.id!, title: "Updated" });
-            }}>
-            {note.id} {note.title} {note.text}
-          </div>
-        );
-      })}
-    </main>
+    <DataBaseProvider>
+      <ConfigProvider
+        theme={{
+          token: {
+            colorPrimary: "#f5f5f5",
+          },
+        }}>
+        <Dashboard />
+      </ConfigProvider>
+    </DataBaseProvider>
   );
 };
 

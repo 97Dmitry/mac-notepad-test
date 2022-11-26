@@ -4,6 +4,7 @@ export interface Note {
   id?: number;
   title: string;
   text: string;
+  created: Date;
 }
 
 export class MySubClassedDexie extends Dexie {

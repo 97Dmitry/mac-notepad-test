@@ -18,6 +18,9 @@ module.exports = {
   },
   plugins: ["react", "@typescript-eslint", "unused-imports", "simple-import-sort", "prettier"],
   rules: {
+    "@typescript-eslint/no-empty-interface": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-empty-function": "off",
     "react/react-in-jsx-scope": "off",
     "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx", ".tsx", ".ts"] }],
     quotes: ["error", "double"],
@@ -26,6 +29,12 @@ module.exports = {
     "simple-import-sort/exports": "error",
     "eol-last": ["error", "always"],
     semi: ["error", "always"],
-    "@typescript-eslint/no-empty-interface": "off",
+    "linebreak-style": ["error", "windows"],
+    "prettier/prettier": [
+      "error",
+      {
+        endOfLine: "crlf",
+      },
+    ],
   },
 };
