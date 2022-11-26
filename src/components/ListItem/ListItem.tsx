@@ -5,14 +5,14 @@ import { useDatabaseContext } from "hooks/useDataBaseContext";
 import styles from "./styles.module.css";
 
 const ListItem = () => {
-  const { noteList, note, selectNote } = useDatabaseContext();
+  const { notesList, note, selectNote } = useDatabaseContext();
   const handleSelectNote = (id: number) => {
     selectNote && selectNote(id);
   };
 
   return (
     <List
-      dataSource={noteList}
+      dataSource={notesList}
       rowKey={(item) => item.id!}
       renderItem={(item) => (
         <List.Item

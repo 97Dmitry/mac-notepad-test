@@ -3,11 +3,13 @@ import { createContext } from "react";
 
 interface IDefaultState {
   note: Note;
-  noteList: Array<Note>;
+  isEditNote: boolean;
+  changeEditStatus: () => void;
+  notesList: Array<Note>;
   addNote: (payload: CreateNote) => void;
 
   selectNote: (id: number) => void;
-  updateNote: (payload: UpdateNoteById) => Promise<number | undefined>;
+  updateNote: (payload: UpdateNoteById) => void;
   deleteNote: (id: number) => void;
 }
 

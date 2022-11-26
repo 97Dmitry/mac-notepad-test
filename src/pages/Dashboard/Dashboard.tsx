@@ -1,5 +1,5 @@
 import { Col, Row } from "antd";
-import { Header, Sidebar } from "components";
+import { Header, Sidebar, Workspace } from "components";
 import { MainLayout } from "layouts";
 
 import styles from "./styles.module.css";
@@ -17,7 +17,7 @@ const Dashboard = () => {
           <Sidebar />
         </Col>
         <Col flex="1 0 auto" span={20} className="site-layout-background">
-          content
+          <Workspace />
         </Col>
       </Row>
     </MainLayout>
