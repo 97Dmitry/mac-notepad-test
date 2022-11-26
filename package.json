@@ -2,8 +2,15 @@
   "name": "mac-notepad-test",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
   "dependencies": {
     "antd": "^5.0.1",
+    "date-fns": "^2.29.3",
     "dexie": "^3.2.2",
     "dexie-react-hooks": "^1.1.1",
     "react": "^18.2.0",
@@ -29,12 +36,6 @@
     "eslint-plugin-simple-import-sort": "^8.0.0",
     "eslint-plugin-unused-imports": "^2.0.0",
     "prettier": "^2.8.0"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
   },
   "browserslist": {
     "production": [

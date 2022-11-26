@@ -1,18 +1,19 @@
 import { db } from "db";
 import ErrorHandler from "utils/ErrorHandler";
 
-interface AddNoteProps {
+export interface CreateNote {
   title: string;
   text: string;
 }
 
-const addNote = async (payload: AddNoteProps) => {
+const createNote = async (payload: CreateNote) => {
   const { title, text } = payload;
 
   try {
     const note = await db.notes.add({
       title,
       text,
+      created: new Date(),
     });
 
     return note;
@@ -21,4 +22,4 @@ const addNote = async (payload: AddNoteProps) => {
   }
 };
 
-export default addNote;
+export default createNote;
