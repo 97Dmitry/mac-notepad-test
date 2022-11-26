@@ -2,16 +2,19 @@ import { db, Note } from "db";
 import ErrorHandler from "utils/ErrorHandler";
 
 export interface UpdateNoteById extends Partial<Note> {
-  id: number;
+  id?: number;
 }
 
 const updateNoteById = async (payload: UpdateNoteById) => {
-  const { id, title, text } = payload;
+  const { id, title, text, created } = payload;
+
+  if (!id) return;
 
   const data = Object.assign(
     {},
     title === undefined ? null : { title },
     text === undefined ? null : { text },
+    created === undefined ? null : { created },
   );
 
   try {

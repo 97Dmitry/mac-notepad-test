@@ -7,17 +7,18 @@ import {
   useGetAllNotes,
   useGetNoteById,
 } from "db";
-import { FC, PropsWithChildren } from "react";
+import { FC, PropsWithChildren, useState } from "react";
 
 const DataBaseProvider: FC<PropsWithChildren> = ({ children }) => {
   const { notes } = useGetAllNotes();
   const { note, setCurrentNoteId } = useGetNoteById();
+  const [isEditNote, setIsEditNote] = useState<boolean>(false);
   const addNote = (payload: CreateNote) => {
     createNote(payload);
   };
 
-  const updateNote = async (payload: UpdateNoteById) => {
-    return await updateNoteById(payload);
+  const updateNote = (payload: UpdateNoteById) => {
+    updateNoteById(payload);
   };
 
   const deleteNote = async (id: number) => {
@@ -28,11 +29,17 @@ const DataBaseProvider: FC<PropsWithChildren> = ({ children }) => {
     if (id !== note?.id) setCurrentNoteId(id);
   };
 
+  const changeEditStatus = () => {
+    setIsEditNote(!isEditNote);
+  };
+
   return (
     <DataBaseContext.Provider
       value={{
         note,
-        noteList: notes,
+        isEditNote,
+        changeEditStatus,
+        notesList: notes,
         addNote,
         selectNote,
         updateNote,
