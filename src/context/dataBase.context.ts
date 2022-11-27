@@ -4,9 +4,9 @@ import { createContext } from "react";
 interface IDefaultState {
   note: Note;
   isEditNote: boolean;
-  changeEditStatus: () => void;
+  changeEditStatus: (status: boolean) => void;
   notesList: Array<Note>;
-  addNote: (payload: CreateNote) => void;
+  addNote: (payload: CreateNote) => Promise<number>;
 
   selectNote: (id: number) => void;
   updateNote: (payload: UpdateNoteById) => void;

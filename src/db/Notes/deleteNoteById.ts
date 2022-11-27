@@ -1,7 +1,7 @@
 import { db } from "db";
 import ErrorHandler from "utils/ErrorHandler";
 
-const deleteNote = async (id: number) => {
+const deleteNoteById = async (id: number) => {
   try {
     await db.notes.delete(id);
   } catch (error) {
@@ -9,4 +9,4 @@ const deleteNote = async (id: number) => {
   }
 };
 
-export default deleteNote;
+export default deleteNoteById;

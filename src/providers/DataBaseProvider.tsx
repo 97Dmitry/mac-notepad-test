@@ -2,6 +2,7 @@ import { DataBaseContext } from "context";
 import {
   CreateNote,
   createNote,
+  deleteNoteById,
   UpdateNoteById,
   updateNoteById,
   useGetAllNotes,
@@ -13,8 +14,10 @@ const DataBaseProvider: FC<PropsWithChildren> = ({ children }) => {
   const { notes } = useGetAllNotes();
   const { note, setCurrentNoteId } = useGetNoteById();
   const [isEditNote, setIsEditNote] = useState<boolean>(false);
-  const addNote = (payload: CreateNote) => {
-    createNote(payload);
+  const addNote = (payload: CreateNote): Promise<number> => {
+    return new Promise((resolve) => {
+      createNote(payload).then((data) => resolve(data as number));
+    });
   };
 
   const updateNote = (payload: UpdateNoteById) => {
@@ -22,15 +25,15 @@ const DataBaseProvider: FC<PropsWithChildren> = ({ children }) => {
   };
 
   const deleteNote = async (id: number) => {
-    await deleteNote(id);
+    await deleteNoteById(id);
   };
 
   const selectNote = (id: number) => {
     if (id !== note?.id) setCurrentNoteId(id);
   };
 
-  const changeEditStatus = () => {
-    setIsEditNote(!isEditNote);
+  const changeEditStatus = (status: boolean) => {
+    setIsEditNote(status);
   };
 
   return (

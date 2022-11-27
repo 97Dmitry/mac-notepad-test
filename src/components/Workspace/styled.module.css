@@ -7,11 +7,24 @@
 }
 
 .workspace {
-  width: 100%;
-  height: 100%;
   padding: 10px;
+}
+
+.workspace__content {
+  max-width: fit-content;
 }
 
 .workspace__date {
   text-align: center;
+
+}
+
+.workspace__title-input {
+  margin-bottom: 24px;
+}
+
+.markdown-html {}
+
+.markdown-html * img {
+  max-width: 100%;
 }

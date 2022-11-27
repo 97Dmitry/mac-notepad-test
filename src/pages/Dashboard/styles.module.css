@@ -12,6 +12,15 @@
   padding-right: 2px;
 }
 
+.workspace {
+  max-height: calc(100vh - 64px);
+  overflow-y: auto;
+}
+
+.workspace::-webkit-scrollbar {
+  display: none;
+}
+
 .sidebar::-webkit-scrollbar {
   display: none;
 }
@@ -19,4 +28,5 @@
 
 .full-space-row {
   flex: 1 0 auto;
+  flex-flow: row nowrap;
 }

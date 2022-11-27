@@ -13,7 +13,7 @@ export class MySubClassedDexie extends Dexie {
   constructor() {
     super("notepad-db");
     this.version(1).stores({
-      notes: "++id, title, text",
+      notes: "++id, title, text, created",
     });
   }
 }
