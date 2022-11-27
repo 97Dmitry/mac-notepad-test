@@ -1,18 +1,29 @@
 import { DeleteOutlined, EditOutlined, EditTwoTone, FormOutlined } from "@ant-design/icons";
-import { notification, Space, Typography } from "antd";
+import { Input, notification, Space } from "antd";
 import { Modal } from "antd";
 import { NotificationPlacement } from "antd/es/notification/interface";
-import { useState } from "react";
+import { useDatabaseContext } from "hooks/useDataBaseContext";
+import { ChangeEvent, useCallback, useState } from "react";
+import debounce from "utils/debounce";
 
-import { useDatabaseContext } from "../../hooks/useDataBaseContext";
 import styles from "./styles.module.css";
 
 const Header = () => {
   const [api, contextHolder] = notification.useNotification();
+  const [searchValue, setSearchValue] = useState<string>("");
 
-  const { note, addNote, selectNote, isEditNote, changeEditStatus, deleteNote } =
-    useDatabaseContext();
+  const {
+    note,
+    addNote,
+    selectNote,
+    isEditNote,
+    changeEditStatus,
+    deleteNote,
+    searchNotesByTitle,
+  } = useDatabaseContext();
   const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false);
+
+  const debounceSearch = debounce(searchNotesByTitle!, 1000);
 
   const openNotification = (placement: NotificationPlacement, message: string) => {
     api.info({
@@ -45,30 +56,40 @@ const Header = () => {
       });
   };
 
+  const onChangeSearchValue = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(event.target.value);
+    debounceSearch!(event.target.value);
+  }, []);
+
   return (
     <>
       {contextHolder}
       <div className={styles.header}>
         <Space size="large" align="center">
-          <Typography.Title level={3}>
-            <FormOutlined onClick={handleAddNote} />
-          </Typography.Title>
+          <FormOutlined className={styles["header__icon"]} onClick={handleAddNote} />
 
           {note?.id && (
             <>
-              <Typography.Title level={3}>
-                {isEditNote ? (
-                  <EditTwoTone onClick={() => changeEditStatus!(!isEditNote)} />
-                ) : (
-                  <EditOutlined onClick={() => changeEditStatus!(!isEditNote)} />
-                )}
-              </Typography.Title>
-
-              <Typography.Title level={3}>
-                <DeleteOutlined onClick={showDeleteModal} />
-              </Typography.Title>
+              {isEditNote ? (
+                <EditTwoTone
+                  className={styles["header__icon"]}
+                  onClick={() => changeEditStatus!(!isEditNote)}
+                />
+              ) : (
+                <EditOutlined
+                  className={styles["header__icon"]}
+                  onClick={() => changeEditStatus!(!isEditNote)}
+                />
+              )}
+              <DeleteOutlined className={styles["header__icon"]} onClick={showDeleteModal} />
             </>
           )}
+          <Input
+            placeholder="Search by title"
+            value={searchValue}
+            onChange={onChangeSearchValue}
+            allowClear
+          />
         </Space>
       </div>
       <Modal

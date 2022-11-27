@@ -11,7 +11,8 @@ import {
 import { FC, PropsWithChildren, useState } from "react";
 
 const DataBaseProvider: FC<PropsWithChildren> = ({ children }) => {
-  const { notes } = useGetAllNotes();
+  const [searchValue, setSearchValue] = useState<string>("");
+  const { notes } = useGetAllNotes({ searchValue });
   const { note, setCurrentNoteId } = useGetNoteById();
   const [isEditNote, setIsEditNote] = useState<boolean>(false);
   const addNote = (payload: CreateNote): Promise<number> => {
@@ -36,6 +37,10 @@ const DataBaseProvider: FC<PropsWithChildren> = ({ children }) => {
     setIsEditNote(status);
   };
 
+  const searchNotesByTitle = (value: string) => {
+    setSearchValue(value);
+  };
+
   return (
     <DataBaseContext.Provider
       value={{
@@ -47,6 +52,7 @@ const DataBaseProvider: FC<PropsWithChildren> = ({ children }) => {
         selectNote,
         updateNote,
         deleteNote,
+        searchNotesByTitle,
       }}>
       {children}
     </DataBaseContext.Provider>
