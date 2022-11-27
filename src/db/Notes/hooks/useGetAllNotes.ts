@@ -1,17 +1,24 @@
 import { db } from "db";
 import { useLiveQuery } from "dexie-react-hooks";
 
-const useGetNoteById = () => {
-  // const notes = useLiveQuery(() => db.notes.toArray(), []);
-  const notes = useLiveQuery(() => db.notes.orderBy("created").reverse().toArray(), []);
+interface UseGetNoteByIdProps {
+  searchValue: string;
+}
 
-  // const notes = data?.sort((a, b) => {
-  //   if (a.created > b.created) {
-  //     return -1;
-  //   } else if (a.created < b.created) {
-  //     return 1;
-  //   } else return 0;
-  // });
+const useGetNoteById = ({ searchValue }: UseGetNoteByIdProps) => {
+  console.log(searchValue);
+
+  const notes = useLiveQuery(
+    () =>
+      db.notes
+        .orderBy("created")
+        .reverse()
+        .filter((note) =>
+          searchValue ? new RegExp(searchValue.toLowerCase()).test(note.title.toLowerCase()) : true,
+        )
+        .toArray(),
+    [searchValue],
+  );
 
   return { notes };
 };

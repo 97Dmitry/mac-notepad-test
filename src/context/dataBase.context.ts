@@ -7,10 +7,10 @@ interface IDefaultState {
   changeEditStatus: (status: boolean) => void;
   notesList: Array<Note>;
   addNote: (payload: CreateNote) => Promise<number>;
-
   selectNote: (id: number) => void;
   updateNote: (payload: UpdateNoteById) => void;
   deleteNote: (id: number) => void;
+  searchNotesByTitle: (value: string) => void;
 }
 
 const DataBaseContext = createContext<Partial<IDefaultState>>({});
