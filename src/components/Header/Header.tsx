@@ -99,7 +99,7 @@ const Header = () => {
         onCancel={handleDeleteCancel}
         okType="danger"
         okText="Delete">
-        <p>Some contents...</p>
+        <p>Cannot be canceled after</p>
       </Modal>
     </>
   );
