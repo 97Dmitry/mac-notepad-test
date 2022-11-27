@@ -30,11 +30,10 @@ module.exports = {
     "simple-import-sort/exports": "error",
     "eol-last": ["error", "always"],
     semi: ["error", "always"],
-    "linebreak-style": ["error", "windows"],
     "prettier/prettier": [
       "error",
       {
-        endOfLine: "crlf",
+        endOfLine: "auto",
       },
     ],
   },
