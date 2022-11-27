@@ -6,8 +6,6 @@ interface UseGetNoteByIdProps {
 }
 
 const useGetNoteById = ({ searchValue }: UseGetNoteByIdProps) => {
-  console.log(searchValue);
-
   const notes = useLiveQuery(
     () =>
       db.notes

@@ -8,8 +8,6 @@ export interface UpdateNoteById extends Partial<Note> {
 const updateNoteById = async (payload: UpdateNoteById) => {
   const { id, title, text, created } = payload;
 
-  console.log(id);
-
   if (!id) return;
 
   const data = Object.assign(
