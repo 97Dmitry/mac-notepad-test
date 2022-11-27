@@ -1,3 +1,7 @@
 .site-layout-background {
   background: #f5f5f5 !important;
 }
+
+.EasyMDEContainer {
+  display: grid !important;
+}
